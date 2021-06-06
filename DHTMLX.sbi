@@ -57,7 +57,7 @@
   
   ; Grid
   
-  Declare NewGrid(*GridProperties.sGridProperties)
+  Declare NewGrid(*GridProperties.sGridProperties, Container = #PB_Ignore)
   
   Declare Grid_AddCellCss(Grid, Row.s, Col.s, Css.s)      ; adds a style to a cell
   Declare Grid_AddRowCss(Grid, Id.s, Css.s)               ; adds a style to a row
@@ -249,7 +249,14 @@ Module DHTMLX
   
   ; Grid (https://docs.dhtmlx.com/suite/grid__index.html)
   
-  Procedure NewGrid(*GridProperties.sGridProperties)
+  Procedure NewGrid(*GridProperties.sGridProperties, Container = #PB_Ignore)
+    
+    ! if (v_container == -65535) v_container = "body";
+    
+    If IsGadget(Container)
+      Protected GID = GadgetID(Container)
+      ! v_container = v_gid.div;
+    EndIf
     
     ! p_gridproperties._data = p_gridproperties._dataset;
     
@@ -260,7 +267,7 @@ Module DHTMLX
     !   }
     ! }  
     
-    ! var newGrid = new dhx.Grid("grid_container", p_gridproperties);
+    ! var newGrid = new dhx.Grid(v_container, p_gridproperties);
     
     ! return newGrid;
     
@@ -344,7 +351,7 @@ Module DHTMLX
     ! v_grid.showRow(v_rowid);
   EndProcedure
   
-  ; Window (https://docs.dhtmlx.com/windows__index.html)
+  ; Window (https://docs.dhtmlx.com/suite/window__index.html)
   
   Procedure NewWindow(*WindowProperties.sWindowProperties)
     
