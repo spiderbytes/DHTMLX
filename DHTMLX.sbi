@@ -1,0 +1,424 @@
+﻿DeclareModule DHTMLX
+  
+  EnableExplicit
+  
+  Structure sGridProperties
+    adjust.s           ; defines whether the width of columns is automatically adjusted to the width of their content
+    autoEmptyRow.i     ; adds an empty row after the last filled row in the Grid
+    autoHeight.i       ; makes long text to split into multiple lines based on the width of the column
+    autoWidth.i        ; makes grid's columns to fit the size of a grid
+    columns.i          ; specifies the configuration of grid columns
+    css.s              ; adds style classes to Grid
+    dataset.i          ; specifies an array of data objects to set into the grid
+    dragCopy.i         ; defines that a row is copied to a target during drag-n-drop
+    dragItem.s         ; enables the possibility to reorder grid columns by drag and drop
+    dragMode.s         ; enables drag-n-drop in Grid
+    editable.i         ; enables editing in Grid columns
+    eventHandlers.i    ; adds event handlers to HTML elements of a custom template of a Grid cell or to the HTML elements defined in the data set of Grid
+    footerRowHeight.i  ; sets the height of rows in the footer
+    headerRowHeight.i  ; sets the height of rows in the header
+    height.i           ; sets the height of a grid
+    htmlEnable.i       ; specifies the HTML content (inner HTML) of Grid columns
+    keyNavigation.i    ; enables keyboard navigation in Grid
+    leftSplit.i        ; sets the number of frozen columns
+    multiselection.i   ; enables multi-row/multi-cell selection in Grid
+    resizable.i        ; defines whether columns can be resized
+    rowCss.i           ; sets style for a row
+    rowHeight.i        ; defines the height of a row in a grid
+    selection.s        ; enables selection in a grid
+    sortable.i         ; defines whether sorting on clicking headers of columns is enabled
+    spans.i            ; describes the configuration of cols/rows spans
+    tooltip.i          ; enables a tooltip on hovering over the content of a column
+    width.i            ; sets the width of a grid
+  EndStructure
+  
+  Structure sWindowProperties
+    closable.i          ; defines whether a window can be closed
+    css.s               ; adds style classes for the component
+    footer.i            ; adds a footer to a window
+    header.i            ; adds a header to a window
+    height.i            ; sets the height of a window
+    html.s              ; sets an HTML content into a window on initialization
+    left.i              ; the left coordinate of a window position
+    minHeight.i         ; sets the minimal height of a window
+    minWidth.i          ; sets the minimal width of a window
+    modal.i             ; defines whether a window is modal
+    movable.i           ; defines whether a window is movable
+    node.i              ; optional, the container for a window or its id
+    resizable.i         ; defines whether a window can be resized
+    title.s             ; adds some text into the header of a window
+    top.i               ; the top coordinate of a window position
+    viewportOverflow.i  ; defines whether a window can go beyond borders of a browser
+    width.i             ; sets the width of a window    
+    
+  EndStructure
+    
+  Declare Init(Callback)
+  
+  ; Grid
+  
+  Declare NewGrid(*GridProperties.sGridProperties)
+  
+  Declare Grid_AddCellCss(Grid, Row.s, Col.s, Css.s)      ; adds a style to a cell
+  Declare Grid_AddRowCss(Grid, Id.s, Css.s)               ; adds a style to a row
+  Declare Grid_AddSpan(Grid, Span)                        ; adds a rows/cols span
+  Declare Grid_AdjustColumnWidth(Grid, Id.s, Adjust.s)    ; adjusts the width of a column to make all its content visible
+  Declare Grid_Destructor(Grid)                           ; removes a Grid instance and releases occupied resources
+  Declare Grid_EditCell(Grid, Row.s, Col.s, EditorType.s) ; enables editing of a Grid cell
+  Declare Grid_EditEnd(Grid, WithoutSave = #False)        ; finishes editing in a cell
+  Declare Grid_GetCellRect(Grid, Row.s, Col.s)            ; returns the parameters of a cell
+  Declare Grid_GetColumn(Grid, ColId.s)                   ; returns an object with attributes of a column
+  Declare Grid_GetHeaderFilter(Grid, ColId.s)             ; returns an object of the header filter by column id
+  Declare Grid_GetScrollState(Grid)                       ; returns the coordinates of a position a grid has been scrolled to
+  Declare Grid_GetSortingState(Grid)                      ; returns the current state of sorting data in Grid
+  Declare Grid_GetSpan(Grid, Row.s, Col.s)                ; returns an object with spans
+  Declare Grid_HideColumn(Grid, ColId.s)                  ; hides a column of Grid
+  Declare Grid_HideRow(Grid, RowId.s)                     ; hides a row of Grid
+  Declare Grid_IsColumnHidden(Grid, ColId.s)              ; checks whether a column is hidden
+  Declare Grid_IsRowHidden(Grid, RowId.s)                 ; checks whether a row is hidden
+  Declare Grid_Paint(Grid)                                ; repaints a grid on a page
+  Declare Grid_RemoveCellCss(Grid, Row.s, Col.s, Css.s)   ; removes a style from a cell
+  Declare Grid_RemoveRowCss(Grid, Id.s, Css.s)            ; removes a style from a row
+  Declare Grid_RemoveSpan(Grid, Row.s, Col.s)             ; removes a cols/rows span
+  Declare Grid_Scroll(Grid, X, Y)                         ; scrolls a grid according to specified coordinates
+  Declare Grid_ScrollTo(Grid, Row.s, Col.s)               ; scrolls a grid to a specified cell
+  Declare Grid_SetColumns(Grid, Columns)                  ; sets configuration for Grid columns
+  Declare Grid_ShowColumn(Grid, ColId.s)                  ; makes a specified column visible on a page
+  Declare Grid_ShowRow(Grid, RowId.s)                     ; makes a specified row visible on a page
+  
+  ; Window
+  
+  Declare NewWindow(*WindowProperties.sWindowProperties)
+  
+  Declare Window_Attach(Window, DHTMLXComponent)          ; attaches a DHTMLX component to a dhtmlxWindow
+  Declare Window_AttachHTML(Window, HTML.s)               ; adds an HTML content into a dhtmlxWindow
+  Declare Window_Destructor(Window)                       ; removes a window instance and releases occupied resources
+  Declare Window_GetContainer(Window)                     ; returns the HTML element of Window
+  Declare Window_GetPosition(Window)                      ; gets the position of a window
+  Declare Window_GetSize(Window)                          ; gets the size of window
+  Declare Window_GetWidget(Window)                        ; returns the widget attached to Window
+  Declare Window_Hide(Window)                             ; hides a window
+  Declare Window_IsFullScreen(Window)                     ; checks whether the window is in the full screen mode
+  Declare Window_IsVisible(Window)                        ; checks whether a window is visible
+  Declare Window_Paint(Window)                            ; repaints a window on a page
+  Declare Window_SetFullScreen(Window)                    ; switches the window into the full screen mode
+  Declare Window_SetPosition(Window, Left, Top)           ; sets the position of a window
+  Declare Window_SetSize(Window, Width, Height)           ; sets the size of a window
+  Declare Window_Show(Window)                             ; shows a window on a page
+  Declare Window_UnsetFullScreen(Window)                  ; switches the window from the full screen mode into the windowed mode
+  
+  ; Layout
+  
+  Declare NewLayout(Parent.s, Layout)
+
+EndDeclareModule
+
+Module DHTMLX
+  
+  EnableExplicit
+
+  Procedure SetWindowProperties()
+    
+    ! s_dhtmlx$swindowproperties = function() {
+    !   this._closable = -65535;
+    !   this._css = -65535;
+    !   this._footer = -65535;
+    !   this._header = -65535;
+    !   this._height = -65535;
+    !   this._html = -65535;
+    !   this._left = -65535;
+    !   this._minHeight = -65535;
+    !   this._minWidth = -65535;
+    !   this._modal = -65535;
+    !   this._movable = -65535;
+    !   this._node = -65535;
+    !   this._resizable = -65535;
+    !   this._title = -65535;
+    !   this._top = -65535;
+    !   this._viewportOverflow = -65535;
+    !   this._width = -65535;
+    !   this.copy = function (dest) {
+    !     var k;
+    !     dest._closable = this._closable;
+    !     dest._css = this._css;
+    !     dest._footer = this._footer;
+    !     dest._header = this._header;
+    !     dest._height = this._height;
+    !     dest._html = this._html;
+    !     dest._left = this._left;
+    !     dest._minHeight = this._minHeight;
+    !     dest._minWidth = this._minWidth;
+    !     dest._modal = this._modal;
+    !     dest._movable = this._movable;
+    !     dest._node = this._node;
+    !     dest._resizable = this._resizable;
+    !     dest._title = this._title;
+    !     dest._top = this._top;
+    !     dest._viewportOverflow = this._viewportOverflow;
+    !     dest._width = this._width;
+    !   };
+    ! }
+    !     
+    
+  EndProcedure
+    
+  Procedure SetGridProperties()
+    
+    ! s_dhtmlx$sgridproperties = function(){
+    !   this._adjust = -65535;
+    !   this._autoEmptyRow = -65535;
+    !   this._autoHeight = -65535;
+    !   this._autoWidth = -65535;
+    !   this._columns = -65535;
+    !   this._css = -65535;
+    !   this._dataset = -65535;
+    !   this._dragCopy = -65535;
+    !   this._dragItem = -65535;
+    !   this._dragMode = -65535;
+    !   this._editable = -65535;
+    !   this._eventHandlers = -65535;
+    !   this._footerRowHeight = -65535;
+    !   this._headerRowHeight = -65535;
+    !   this._height = -65535;
+    !   this._htmlEnable = -65535;
+    !   this._keyNavigation = -65535;
+    !   this._leftSplit = -65535;
+    !   this._multiselection = -65535;
+    !   this._resizable = -65535;
+    !   this._rowCss = -65535;
+    !   this._rowHeight = -65535;
+    !   this._selection = -65535;
+    !   this._sortable = -65535;
+    !   this._spans = -65535;
+    !   this._tooltip = -65535;
+    !   this._width = -65535;
+    !   this.copy = function (dest) {
+    !     var k;
+    !     dest._adjust = this._adjust;
+    !     dest._autoEmptyRow = this._autoEmptyRow;
+    !     dest._autoHeight = this._autoHeight;
+    !     dest._autoWidth = this._autoWidth;
+    !     dest._columns = this._columns;
+    !     dest._css = this._css;
+    !     dest._dataset = this._dataset;
+    !     dest._dragCopy = this._dragCopy;
+    !     dest._dragItem = this._dragItem;
+    !     dest._dragMode = this._dragMode;
+    !     dest._editable = this._editable;
+    !     dest._eventHandlers = this._eventHandlers;
+    !     dest._footerRowHeight = this._footerRowHeight;
+    !     dest._headerRowHeight = this._headerRowHeight;
+    !     dest._height = this._height;
+    !     dest._htmlEnable = this._htmlEnable;
+    !     dest._keyNavigation = this._keyNavigation;
+    !     dest._leftSplit = this._leftSplit;
+    !     dest._multiselection = this._multiselection;
+    !     dest._resizable = this._resizable;
+    !     dest._rowCss = this._rowCss;
+    !     dest._rowHeight = this._rowHeight;
+    !     dest._selection = this._selection;
+    !     dest._sortable = this._sortable;
+    !     dest._spans = this._spans;
+    !     dest._tooltip = this._tooltip;
+    !     dest._width = this._width;
+    !   };
+    ! }
+    
+  EndProcedure
+  
+  Procedure Init(Callback)
+    
+    SetWindowProperties()
+    SetGridProperties()
+    
+    ! define = null;
+    
+    ! $("<link href='https://cdn.dhtmlx.com/suite/edge/suite.css' rel='stylesheet' />").appendTo("head");
+    
+    ! $.ajax({
+    !   url: "https://cdn.dhtmlx.com/suite/edge/suite.js",
+    !   dataType: "script",
+    ! })
+    ! .done(function() {
+    !   v_callback();
+    ! })
+    ! .fail(function() {
+    ! }) 
+    
+  EndProcedure
+  
+  ; Grid (https://docs.dhtmlx.com/suite/grid__index.html)
+  
+  Procedure NewGrid(*GridProperties.sGridProperties)
+    
+    ! p_gridproperties._data = p_gridproperties._dataset;
+    
+    ! // adjust Properties    
+    ! for (var key in p_gridproperties) {
+    !   if (key.charAt(0) == "_" && p_gridproperties[key] != -65535) {
+    !     p_gridproperties[key.substr(1)] = p_gridproperties[key];
+    !   }
+    ! }  
+    
+    ! var newGrid = new dhx.Grid("grid_container", p_gridproperties);
+    
+    ! return newGrid;
+    
+  EndProcedure
+  Procedure Grid_AddCellCss(Grid, Row.s, Col.s, Css.s)      ; adds a style to a cell
+    ! v_grid.addCellCss(v_row, v_col, c_css);
+  EndProcedure
+  Procedure Grid_AddRowCss(Grid, Id.s, Css.s)               ; adds a style to a row
+    ! v_grid.addRowCss(v_id, v_css);
+  EndProcedure
+  Procedure Grid_AddSpan(Grid, Span)                        ; adds a rows/cols span
+    ! v_grid.addSpan(v_span);
+  EndProcedure
+  Procedure Grid_AdjustColumnWidth(Grid, Id.s, Adjust.s)    ; adjusts the width of a column to make all its content visible
+    ! v_grid.adjustColumnWidth(v_id, v_adjust);
+  EndProcedure
+  Procedure Grid_Destructor(Grid)                           ; removes a Grid instance and releases occupied resources
+    ! v_grid.destructor();
+  EndProcedure
+  Procedure Grid_EditCell(Grid, Row.s, Col.s, EditorType.s) ; enables editing of a Grid cell
+    ! v_grid.editCell(v_row, v_col, v_editortype);
+  EndProcedure
+  Procedure Grid_EditEnd(Grid, WithoutSave = #False)        ; finishes editing in a cell
+    ! v_grid.editEnd(v_withoutsave);
+  EndProcedure
+  Procedure Grid_GetCellRect(Grid, Row.s, Col.s)            ; returns the parameters of a cell
+    ! return v_grid.getCellRect(v_row, v_col);
+  EndProcedure
+  Procedure Grid_GetColumn(Grid, ColId.s)                   ; returns an object with attributes of a column
+    ! return v_grid.getColumn(v_colid);
+  EndProcedure
+  Procedure Grid_GetHeaderFilter(Grid, ColId.s)             ; returns an object of the header filter by column id
+    ! return v_grid.getHeaderFilter(v_colid);
+  EndProcedure
+  Procedure Grid_GetScrollState(Grid)                       ; returns the coordinates of a position a grid has been scrolled to
+    ! return v_grid.getScrollState();
+  EndProcedure
+  Procedure Grid_GetSortingState(Grid)                      ; returns the current state of sorting data in Grid
+    ! return v_grid.getSortingState();
+  EndProcedure
+  Procedure Grid_GetSpan(Grid, Row.s, Col.s)                ; returns an object with spans
+    ! return v_grid.getSpan(v_row, v_col);
+  EndProcedure
+  Procedure Grid_HideColumn(Grid, ColId.s)                  ; hides a column of Grid
+    ! v_grid.hideColumn(v_colid);
+  EndProcedure
+  Procedure Grid_HideRow(Grid, RowId.s)                     ; hides a row of Grid
+    ! v_grid.hideRow(v_rowid);
+  EndProcedure
+  Procedure Grid_IsColumnHidden(Grid, ColId.s)              ; checks whether a column is hidden
+    ! return v_grid.isColumnHidden(v_colid);
+  EndProcedure
+  Procedure Grid_IsRowHidden(Grid, RowId.s)                 ; checks whether a row is hidden
+    ! return v_grid.isRowHidden(v_rowid);
+  EndProcedure
+  Procedure Grid_Paint(Grid)                                ; repaints a grid on a page
+    ! v_grid.paint();
+  EndProcedure
+  Procedure Grid_RemoveCellCss(Grid, Row.s, Col.s, Css.s)   ; removes a style from a cell
+    ! v_grid.removeCellCss(v_row, v_col, v_css);
+  EndProcedure
+  Procedure Grid_RemoveRowCss(Grid, Id.s, Css.s)            ; removes a style from a row
+    ! v_grid.removeRowCss(v_id, v_css);
+  EndProcedure
+  Procedure Grid_RemoveSpan(Grid, Row.s, Col.s)             ; removes a cols/rows span
+    ! v_grid.removeSpan(v_row, v_col);
+  EndProcedure
+  Procedure Grid_Scroll(Grid, X, Y)                         ; scrolls a grid according to specified coordinates
+    ! v_grid.scroll(v_x, v_y);
+  EndProcedure
+  Procedure Grid_ScrollTo(Grid, Row.s, Col.s)               ; scrolls a grid to a specified cell
+    ! v_grid.scrollTo(v_row, v_col);
+  EndProcedure
+  Procedure Grid_SetColumns(Grid, Columns)                  ; sets configuration for Grid columns
+    ! v_grid.setColumns(v_columns);
+  EndProcedure
+  Procedure Grid_ShowColumn(Grid, ColId.s)                  ; makes a specified column visible on a page
+    ! v_grid.showColumn(v_colid);
+  EndProcedure
+  Procedure Grid_ShowRow(Grid, RowId.s)                     ; makes a specified row visible on a page
+    ! v_grid.showRow(v_rowid);
+  EndProcedure
+  
+  ; Window (https://docs.dhtmlx.com/windows__index.html)
+  
+  Procedure NewWindow(*WindowProperties.sWindowProperties)
+    
+    ! // adjust Properties    
+    ! for (var key in p_windowproperties) {
+    !   if (key.charAt(0) == "_" && p_windowproperties[key] != -65535) {
+    !     p_windowproperties[key.substr(1)] = p_windowproperties[key];
+    !   }
+    ! }
+    
+    ! var newWindow = new dhx.Window(p_windowproperties);
+    
+    ! return newWindow;
+    
+  EndProcedure
+  Procedure Window_Attach(Window, DHTMLXComponent)          ; attaches a DHTMLX component to a dhtmlxWindow
+    ! v_window.attach(v_dhtmlxcomponent);
+  EndProcedure
+  Procedure Window_AttachHTML(Window, HTML.s)               ; adds an HTML content into a dhtmlxWindow
+    ! v_window.attachHTML(v_html);
+  EndProcedure
+  Procedure Window_Destructor(Window)                       ; removes a window instance and releases occupied resources
+    ! v_window.destructor();
+  EndProcedure
+  Procedure Window_GetContainer(Window)                     ; returns the HTML element of Window
+    ! return v_window.getContainer();
+  EndProcedure
+  Procedure Window_GetPosition(Window)                      ; gets the position of a window
+    ! return v_window.getPosition();
+  EndProcedure
+  Procedure Window_GetSize(Window)                          ; gets the size of window
+    ! return v_window.getSize();
+  EndProcedure
+  Procedure Window_GetWidget(Window)                        ; returns the widget attached to Window
+    ! return v_window.getWidget();
+  EndProcedure
+  Procedure Window_Hide(Window)                             ; hides a window
+    ! v_window.hide();
+  EndProcedure
+  Procedure Window_IsFullScreen(Window)                     ; checks whether the window is in the full screen mode
+    ! return v_window.isFullScreen();
+  EndProcedure
+  Procedure Window_IsVisible(Window)                        ; checks whether a window is visible
+    ! return v_window.isVisible();
+  EndProcedure
+  Procedure Window_Paint(Window)                            ; repaints a window on a page
+    ! v_window.paint();
+  EndProcedure
+  Procedure Window_SetFullScreen(Window)                    ; switches the window into the full screen mode
+    ! v_window.setFullScreen();
+  EndProcedure
+  Procedure Window_SetPosition(Window, Left, Top)           ; sets the position of a window
+    ! v_window.setPosition(v_left, v_top);
+  EndProcedure
+  Procedure Window_SetSize(Window, Width, Height)           ; sets the size of a window
+    ! v_window.setSize(v_width, v_height);
+  EndProcedure
+  Procedure Window_Show(Window)                             ; shows a window on a page
+    ! v_window.show();
+  EndProcedure
+  Procedure Window_UnsetFullScreen(Window)                  ; switches the window from the full screen mode into the windowed mode
+    ! v_window.unsetFullScreen();
+  EndProcedure
+  
+  ; Layout
+  
+  Procedure NewLayout(Parent.s, Layout)
+    
+    ! var newLayout = new dhx.Layout(v_parent, v_layout);    
+    
+    ! return newLayout;
+    
+  EndProcedure
+  
+  
+  
+EndModule
